@@ -1,44 +1,38 @@
-# ShopTrack
+# Vitrin (ShopTrack)
 
-Local store tracker for product stock, sales, and revenue.
-Built for a small shop (tees, hoodies, accessories…) — runs on your PC,
-opens in the browser, works on your phone on the same Wi‑Fi.
+Cironet tarzı **yerel** mağaza paneli — ciro, net kâr, komisyon, iade, gider,
+ürün analizi. Bulut yok; SQLite dosyanda durur. PC’de çalışır, aynı Wi‑Fi’deki
+telefonda tarayıcıdan açılır.
 
-**Stack:** FastAPI · SQLite · plain HTML/CSS/JS
+## Modüller
 
-## What you get
+- Kontrol paneli (ciro / net / marj / gider / dönem sonucu + günlük trend)
+- Siparişler (Mağaza / Pazaryeri / Diğer + komisyon & kargo)
+- Ürünler, ürün analizi, iadeler
+- Giderler, satın alma (stok + ortalama maliyet)
+- Kâr hesaplama (hedef marja göre fiyat önerisi)
+- Uyarılar, gün sonu kasa
 
-- **Overview** — revenue, units sold, product count, estimated profit, low stock, top sellers
-- **Products** — add / edit / delete catalog (SKU, size, color, price, cost, stock)
-- **Sales** — record a sale, stock drops automatically, undo restocks
+Net kâr: `ciro − maliyet − komisyon − kargo − diğer`
 
-Data lives in `shoptrack.db` next to the app. No cloud account.
+## Çalıştır (Windows)
 
-## Run on Windows
-
-Double-click `start.bat`.
-
-Or manually:
+`start.bat` dosyasına çift tıkla.
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+# eski db şeması bozulduysa:
+del shoptrack.db
 python -m scripts.seed
 uvicorn app.main:app --host 0.0.0.0 --port 7070
 ```
 
 - PC: http://127.0.0.1:7070  
-- Phone: http://`<your-pc-ip>`:7070 (same Wi‑Fi)
+- Telefon: http://`<PC-IP>`:7070
 
-Find your PC IP: `ipconfig` → IPv4 Address.
+## Not
 
-## Notes
-
-- Currency defaults to TRY (`app/config.py` / env).
-- Closing the terminal stops the app. Leave `start.bat` open to keep it running.
-- First launch seeds a tiny sample tee catalog so the screen isn’t empty.
-
-## License
-
-Use it, fork it, change it — no ceremony.
+Trendyol API bağlantısı yok — pazaryeri kesintilerini sen girersin.
+Bu bilinçli: kurulum basit, veri sende kalır.

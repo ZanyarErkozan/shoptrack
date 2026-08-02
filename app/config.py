@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    app_name: str = "ShopTrack"
+    app_name: str = "Vitrin"
     database_url: str = "sqlite:///./shoptrack.db"
     host: str = "0.0.0.0"
     port: int = 7070
